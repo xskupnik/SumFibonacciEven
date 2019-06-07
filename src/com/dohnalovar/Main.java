@@ -15,16 +15,17 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        IntFunction<Integer> isEven = (num) -> (num%2 == 0) ? num : 0;
-        BiPredicate<Integer, Integer> isLessThenLimit = (limit, num) -> (num < limit)? true : false;
+        IntFunction<Integer> evenFibOrZero = (num) -> (num%2 == 0) ? num : 0;
+        BiPredicate<Integer, Integer> isLessThenLimit = (limit, num) -> num < limit;
 
-        int sum = 2;
-        FibonacciNum fib = new FibonacciNum();
-        System.out.print("Get the limit for Fibonacci sum: ");
+        System.out.print("Get the limit(>2) for Fibonacci sum: ");
         Scanner sc = new Scanner(System.in);
         Integer limit = sc.nextInt();
+
+        FibonacciNum fib = new FibonacciNum();
+        int sum = 2;
         Integer num;
-        while (isLessThenLimit.test(limit, num = isEven.apply(fib.getNextFibonacci()))){
+        while (isLessThenLimit.test(limit, num = evenFibOrZero.apply(fib.getNextFibonacci()))){
             sum += num;
         }
         System.out.println("Sum of even fibonacci numbers less then limit "+limit+" is "+sum);
